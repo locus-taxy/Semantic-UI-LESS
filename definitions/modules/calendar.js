@@ -46,9 +46,9 @@
           moduleNamespace = 'module-' + namespace,
 
           $module = $(this),
-          $input = $module.find(selector.input),
-          $container = $module.find(selector.popup),
-          $activator = $module.find(selector.activator),
+          $input,
+          $container,
+          $activator,
 
           element = this,
           instance = $module.data(moduleNamespace),
@@ -56,7 +56,16 @@
           isTouch,
           module
           ;
-
+          if(selector.default){
+            $input = $module.find(selector.input);
+            $container = $module.find(selector.popup);
+            $activator = $module.find(selector.activator);
+          }
+          else{
+            $input = $(selector.input);
+            $container = $(selector.popup);
+            $activator = $(selector.activator);
+          }
         module = {
 
           initialize: function () {
@@ -785,7 +794,8 @@
     selector: {
       popup: '.ui.popup',
       input: 'input',
-      activator: 'input'
+      activator: 'input',
+      default: true
     },
 
     regExp: {
